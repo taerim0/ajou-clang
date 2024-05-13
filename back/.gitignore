@@ -22,4 +22,4 @@ yarn-error.log*
 
 # for secure
 
-/package-lock.json
+package-lock.json
