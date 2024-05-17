@@ -6,12 +6,6 @@
 
 ---
 
-# commit message
-
-앞에 날짜 쓰고 괄호 연다음 front 변경 사항인지 back 변경 사항인지 명시 ㄱㄱ
-
----
-
 # role
 
 - 허태림
