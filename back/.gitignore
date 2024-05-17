@@ -22,4 +22,5 @@ yarn-error.log*
 
 # for secure
 
+lib/db.js
 package-lock.json
