@@ -51,11 +51,11 @@ router.post('/login_process', async (req, res) => {
     if (id && pw) {
         if (!regexId.test(id)) {
             sendData.isSuccess = '학번 형식이 잘못되었습니다.';
-            res.send(sendData);
+            return res.send(sendData);
         }
         if (!regexPw.test(pw)) {
             sendData.isSuccess = '비밀번호 형식이 잘못되었습니다.';
-            res.send(sendData);
+            return res.send(sendData);
         }
 
         db.query(`SELECT * FROM user_logindata WHERE studentID = '${id}'`, (err, data, fields) => {
@@ -73,24 +73,24 @@ router.post('/login_process', async (req, res) => {
                         req.session.userID = id;
                         req.session.save(() => {
                             sendData.isLogin = "Logined";
-                            res.send(sendData);
+                            return res.send(sendData);
                         })
                     }
                     else {
                         sendData.isLogin = '비밀번호가 일치하지 않습니다.';
-                        res.send(sendData);
+                        return res.send(sendData);
                     }
                 })
             }
             else {
                 sendData.isLogin = '일치하는 학번 계정 정보가 없습니다.';
-                res.send(sendData);
+                return res.send(sendData);
             }
         });
     }
     else {
         sendData.isLogin = '학번과 비밀번호를 입력하세요.';
-        res.send(sendData);
+        return res.send(sendData);
     }
 })
 
@@ -104,11 +104,11 @@ router.post('/register_process', async (req, res) => {
     if (id && pw && pwc) {
         if (!regexId.test(id)) {
             sendData.isSuccess = '학번 형식이 잘못되었습니다.';
-            res.send(sendData);
+            return res.send(sendData);
         }
         if (!regexPw.test(pw)) {
             sendData.isSuccess = '비밀번호 형식이 잘못되었습니다.';
-            res.send(sendData);
+            return res.send(sendData);
         }
 
         db.query(`SELECT * FROM user_logindata WHERE studentID = '${id}'`, async (err, data, fields) => {
@@ -134,23 +134,23 @@ router.post('/register_process', async (req, res) => {
                     req.session.userID = id;
                     req.session.save(() => {
                         sendData.isSuccess = 'Registered';
-                        res.send(sendData);
+                        return res.send(sendData);
                     })
                 })
             }
             else if (pw != pwc) {
                 sendData.isSuccess = '입력된 비밀번호가 서로 다릅니다.';
-                res.send(sendData);
+                return res.send(sendData);
             }
             else {
                 sendData.isSuccess = '이미 계정이 생성된 학번입니다. 관리자에게 문의하세요.';
-                res.send(sendData);
+                return res.send(sendData);
             }
         });
     }
     else {
         sendData.isSuccess = '학번과 비밀번호를 입력하세요.';
-        res.send(sendData);
+        return res.send(sendData);
     }
 })
 
