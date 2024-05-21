@@ -17,8 +17,12 @@ const AuthPage = () => {
         .then((res) => res.json())
         .then((json) => {
             if (json.isLogin === 'True') {
-                alert('이미 로그인 되어 있습니다.');
-                navigation('/main');
+                fetch('http://localhost:1542/api/auth/logout_process', {
+                    credentials: 'include',
+                })
+                .then(() => {
+                    navigation('/main');
+                });
             }
             else {
                 if (mode === undefined || mode === 'Register') {
@@ -59,6 +63,7 @@ const AuthPage = () => {
                         if (json.isLogin === 'Logined') {
                             alert(json.isLogin);
                             setMode('Logined');
+                            navigation('/main');
                         }
                         else {
                             alert(json.isLogin);
@@ -103,6 +108,7 @@ const AuthPage = () => {
                         if (json.isSuccess === 'Registered') {
                             alert('계정 생성 완료');
                             setMode('Logined');
+                            navigation('/main');
                         }
                         else {
                             alert(json.isSuccess);
