@@ -38,7 +38,7 @@ router.get('/auth_check', (req, res) => {
 
 router.get('/logout_process', async (req, res) => {
     req.session.destroy((err) => {
-        res.redirect('/main');
+        res.redirect('/');
     })
 })
 
@@ -102,6 +102,7 @@ router.post('/register_process', async (req, res) => {
     var sendData = { isSuccess : '' };
 
     if (id && pw && pwc) {
+
         if (!regexId.test(id)) {
             sendData.isSuccess = '학번 형식이 잘못되었습니다.';
             return res.send(sendData);
