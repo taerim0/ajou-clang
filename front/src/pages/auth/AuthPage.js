@@ -38,12 +38,13 @@ const AuthPage = () => {
     if (mode === 'Login') {
         return <>
             <div className = 'LoginForm'>
-                <p><input className='login' type='text' name='userID' placeholder='학번' onChange={event => {
+                <p><input className='login' type='text' placeholder='학번' onChange={event => {
                     setID(event.target.value);
                 }}/></p>
-                <p><input className='login' type='password' name='pwd' placeholder='비밀번호' onChange={event => {
+                <p><input className='login' type='password' placeholder='비밀번호' onChange={event => {
                     setPW(event.target.value);
                 }}/></p>
+                <p></p>
                 <p><input className='btn' type='submit' value='로그인' onClick={() => {
                     const userData = {
                         id : ID,
