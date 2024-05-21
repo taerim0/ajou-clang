@@ -21,7 +21,7 @@ const AuthPage = () => {
                     credentials: 'include',
                 })
                 .then(() => {
-                    navigation('/main');
+                    navigation('/');
                 });
             }
             else {
@@ -64,7 +64,7 @@ const AuthPage = () => {
                         if (json.isLogin === 'Logined') {
                             alert(json.isLogin);
                             setMode('Logined');
-                            navigation('/main');
+                            navigation('/');
                         }
                         else {
                             alert(json.isLogin);
@@ -109,7 +109,7 @@ const AuthPage = () => {
                         if (json.isSuccess === 'Registered') {
                             alert('계정 생성 완료');
                             setMode('Logined');
-                            navigation('/main');
+                            navigation('/');
                         }
                         else {
                             alert(json.isSuccess);
