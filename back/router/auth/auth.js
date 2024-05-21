@@ -4,6 +4,10 @@ const db = require('../../lib/db.js');
 
 const router = express.Router();
 
+const regexId = /^[0-9]{9,9}$/;
+
+const regexPw = /^[a-z0-9#?!@$%^&*-](?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-])[a-z0-9#?!@$%^&*-]{8,20}$/;
+
 router.get('/auth_check', (req, res) => {
     var LoginData = { isLogin : '', studentID : '' };
 
@@ -32,6 +36,12 @@ router.get('/auth_check', (req, res) => {
     res.send(LoginData);
 });
 
+router.get('/logout_process', async (req, res) => {
+    req.session.destroy((err) => {
+        res.redirect('/main');
+    })
+})
+
 router.post('/login_process', async (req, res) => {
     const id = req.body.id.toString();
     const pw = req.body.pw.toString();
@@ -39,6 +49,15 @@ router.post('/login_process', async (req, res) => {
     var sendData = { isLogin : '' };
 
     if (id && pw) {
+        if (!regexId.test(id)) {
+            sendData.isSuccess = '학번 형식이 잘못되었습니다.';
+            res.send(sendData);
+        }
+        if (!regexPw.test(pw)) {
+            sendData.isSuccess = '비밀번호 형식이 잘못되었습니다.';
+            res.send(sendData);
+        }
+
         db.query(`SELECT * FROM user_logindata WHERE studentID = '${id}'`, (err, data, fields) => {
             if (err) {
                 sendData.isLogin = 'DB query error';
@@ -67,8 +86,7 @@ router.post('/login_process', async (req, res) => {
                 sendData.isLogin = '일치하는 학번 계정 정보가 없습니다.';
                 res.send(sendData);
             }
-
-        })
+        });
     }
     else {
         sendData.isLogin = '학번과 비밀번호를 입력하세요.';
@@ -84,6 +102,15 @@ router.post('/register_process', async (req, res) => {
     var sendData = { isSuccess : '' };
 
     if (id && pw && pwc) {
+        if (!regexId.test(id)) {
+            sendData.isSuccess = '학번 형식이 잘못되었습니다.';
+            res.send(sendData);
+        }
+        if (!regexPw.test(pw)) {
+            sendData.isSuccess = '비밀번호 형식이 잘못되었습니다.';
+            res.send(sendData);
+        }
+
         db.query(`SELECT * FROM user_logindata WHERE studentID = '${id}'`, async (err, data, fields) => {
             if (err) {
                 sendData.isSuccess = 'DB query error';

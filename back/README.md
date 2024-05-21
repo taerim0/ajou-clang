@@ -12,3 +12,7 @@ gitkraken 쓰면 자동으로 제외되어서 업로드 될거임
 express
 bcrypt
 mysql
+express-session
+express-mysql-session
+cors
+dotenv
