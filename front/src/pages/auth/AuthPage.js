@@ -80,7 +80,7 @@ const AuthPage = () => {
     else if (mode === 'Register') {
         return <>
             <div className='RegisterForm'>
-                <p><input className='login' type='text' placeholder='아이디' onChange={event => {
+                <p><input className='login' type='text' placeholder='학번' onChange={event => {
                     setID(event.target.value);
                 }}/></p>
                 <p><input className='login' type='password' placeholder='비밀번호' onChange={event => {
