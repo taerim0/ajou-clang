@@ -31,6 +31,7 @@ app.use(express.urlencoded({extended : false }));
 const main = require('./router/main');
 const schedule = require('./router/schedule');
 const auth = require('./router/auth/auth');
+const profile = require('./router/profile');
 
 
 app.get('/', (req, res) => {
@@ -46,6 +47,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/main', main);
 app.use('/api/auth', auth);
+app.use('/api/profile', profile);
 
 
 app.listen(port, () => {

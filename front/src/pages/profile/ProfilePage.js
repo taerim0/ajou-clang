@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import './GalleryPage.css';
+import './ProfilePage.css';
 import {useEffect, useState} from 'react';
 
 
-const GalleryPage = () => {
+const ProfilePage = () => {
     const [mode, setMode] = useState('');
 
     const navigation = useNavigate();
@@ -26,10 +26,13 @@ const GalleryPage = () => {
     if (mode === "Logined") {
         return (
             <div>
-                <input type="file" name="myFile" />
-                <button type="submit" onClick = {() => {
-                    
-                }}>Upload</button>
+                <h1>안녕하세요</h1>
+
+
+
+                <button onClick={() => {
+                    navigation('/auth');
+                }}>로그아웃</button>
             </div>
         );
     }
@@ -43,4 +46,4 @@ const GalleryPage = () => {
     );
 };
 
-export default GalleryPage;
+export default ProfilePage;
